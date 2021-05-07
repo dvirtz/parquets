@@ -1,8 +1,9 @@
 
-export type ParquetCodec = 'PLAIN' | 'RLE';
+export type ParquetCodec = 'PLAIN' | 'RLE' | 'PLAIN_DICTIONARY';
 export type ParquetCompression = 'UNCOMPRESSED' | 'GZIP' | 'SNAPPY' | 'LZO' | 'BROTLI' | 'LZ4';
 export type RepetitionType = 'REQUIRED' | 'OPTIONAL' | 'REPEATED';
 export type ParquetType = PrimitiveType | OriginalType;
+export type ParquetDictionary = Array<string>;
 
 export type PrimitiveType =
   // Base Types
