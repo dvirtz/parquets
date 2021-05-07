@@ -111,19 +111,42 @@
     "singleQuote": true
   },
   "commitlint": {
-      "extends": [
-          "@commitlint/config-conventional"
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        2,
+        "always",
+        200
       ]
+    }
   },
   "release": {
-    "branches": ["master", "dvirtz/develop"],
+    "branches": [
+      {
+          "name": "master",
+          "prerelease": false
+      },
+      {
+          "name": "develop",
+          "prerelease": true
+      }
+    ],
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      ["@semantic-release/git", {
-        "assets": ["lib/**", "src/**", "package.json"],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-      }]
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "lib/**",
+            "src/**",
+            "package.json"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
     ]
   }
 }
