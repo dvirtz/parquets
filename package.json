@@ -1,7 +1,7 @@
 {
-  "name": "parquets",
+  "name": "@dvirtz/parquets",
   "description": "TypeScript implementation of the Parquet file format, based on parquet.js",
-  "version": "0.10.10",
+  "version": "0.0.0-development",
   "upstream": "0.10.1",
   "homepage": "https://github.com/kbajalc/parquets",
   "author": "kbajalc@gmail.com",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kbajalc/parquets.git"
+    "url": "https://github.com/dvirtz/parquets.git"
   },
   "files": [
     "lib",
@@ -35,7 +35,8 @@
     "beta": "npm run build && git push --follow-tags && npm publish --tag beta",
     "tsgen": "thrift-typescript --target apache --rootDir . --sourceDir . --outDir codegen parquet.thrift",
     "tsgencore": "thrift-typescript --target thrift-server --rootDir . --sourceDir . --outDir codegen parquet.thrift",
-    "thrift": "thrift --gen js:node parquet.thrift && thrift --gen js:ts parquet.thrift"
+    "thrift": "thrift --gen js:node parquet.thrift && thrift --gen js:ts parquet.thrift",
+    "semantic-release": "semantic-release"
   },
   "engines": {
     "node": ">=7.6"
@@ -54,6 +55,7 @@
   },
   "devDependencies": {
     "@creditkarma/thrift-typescript": "^3.7.2",
+    "@semantic-release/git": "^9.0.0",
     "@types/bson": "^4.0.0",
     "@types/chai": "^4.1.7",
     "@types/debug": "^4.1.4",
@@ -73,6 +75,7 @@
     "lzo": "^0.4.11",
     "object-stream": "0.0.1",
     "prettier": "^2.1.2",
+    "semantic-release": "^17.4.2",
     "snappy": "^6.3.5",
     "ts-jest": "^26.5.4",
     "ts-node": "^8.3.0",
