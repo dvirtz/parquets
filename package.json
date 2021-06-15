@@ -37,7 +37,7 @@
     "tsgencore": "thrift-typescript --target thrift-server --rootDir . --sourceDir . --outDir codegen parquet.thrift",
     "thrift": "thrift --gen js:node parquet.thrift && thrift --gen js:ts parquet.thrift",
     "semantic-release": "semantic-release",
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "engines": {
     "node": ">=7.6"
