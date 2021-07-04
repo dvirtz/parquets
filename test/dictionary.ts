@@ -4,7 +4,7 @@ const assert = chai.assert;
 import parquet = require('../src');
 import path = require('path');
 
-describe('dictionary encoding', async function() {
+describe('dictionary encoding', function() {
   it('should read uncompressed dictionary from spark', async function() {
     let reader =  await parquet.ParquetReader.openFile(path.resolve(__dirname,'test-files/spark-uncompressed-dict.parquet'));
     let cursor = reader.getCursor();

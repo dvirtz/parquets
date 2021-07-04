@@ -1,5 +1,6 @@
 node_modules
 *.parquet
+!test/**/*.parquet
 npm-debug.log
 .nyc_output
 lib

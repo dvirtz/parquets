@@ -315,7 +315,7 @@ export class ParquetEnvelopeReader {
     ) as any;
 
     const pagesOffset = +colChunk.meta_data.data_page_offset;
-    const pagesSize = +colChunk.meta_data.total_compressed_size;
+    const pagesSize = Math.min(+this.fileSize - pagesOffset, +colChunk.meta_data.total_compressed_size);
     var dictionary = undefined;
 
     if (colChunk.meta_data.dictionary_page_offset) {
@@ -327,12 +327,13 @@ export class ParquetEnvelopeReader {
         offset: 0,
         size: pagesBuf.length
       };
-      const { pageHeader } = Util.decodePageHeader(cursor.buffer);
+      const { length, pageHeader } = Util.decodePageHeader(cursor.buffer);
+      cursor.offset += length;
       dictionary = decodeDictionaryPage(cursor, pageHeader, field, compression);
     }
     
     const pagesBuf = await this.read(pagesOffset, pagesSize);
-    return decodeDataPages(pagesBuf, field, compression, dictionary);
+    return decodeDataPages(pagesBuf, field, compression, +colChunk.meta_data.num_values, dictionary);
   }
 
   async readFooter(): Promise<FileMetaData> {
@@ -368,7 +369,7 @@ function decodeValues(type: PrimitiveType, encoding: ParquetCodec, cursor: Curso
   return PARQUET_CODEC[encoding].decodeValues(type, cursor, count, opts);
 }
 
-function decodeDataPages(buffer: Buffer, column: ParquetField, compression: ParquetCompression, dictionary?: ParquetDictionary): ParquetData {
+function decodeDataPages(buffer: Buffer, column: ParquetField, compression: ParquetCompression, num_values: number, dictionary?: ParquetDictionary): ParquetData {
   const cursor: CursorBuffer = {
     buffer,
     offset: 0,
@@ -382,7 +383,7 @@ function decodeDataPages(buffer: Buffer, column: ParquetField, compression: Parq
     count: 0
   };
 
-  while (cursor.offset < cursor.size) {
+  while (cursor.offset < cursor.size && (!num_values || data.dlevels.length < num_values)) {
     // const pageHeader = new parquet_thrift.PageHeader();
     // cursor.offset += parquet_util.decodeThrift(pageHeader, cursor.buffer);
 
