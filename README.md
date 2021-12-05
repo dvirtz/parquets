@@ -1,20 +1,19 @@
-# parquets
+# @dvirtz/parquets
 
 Fully asynchronous TypeScript implementation of the Parquet file format
 
-[![Build Status](https://travis-ci.org/kbajalc/parquets.svg?branch=master)](https://travis-ci.org/kbajalc/parquets)
-[![npm version](https://badge.fury.io/js/parquets.svg)](https://badge.fury.io/js/parquets)
-[![npm dependency status](https://david-dm.org/kbajalc/parquets.svg)](https://david-dm.org/kbajalc/parquets.svg)
+[![push](https://github.com/dvirtz/parquets/actions/workflows/push.yml/badge.svg)](https://github.com/dvirtz/parquets/actions/workflows/push.yml)
+[![npm version](https://badge.fury.io/js/@dvirtz%2Fparquets.svg)](https://badge.fury.io/js/@dvirtz%2Fparquets)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-This package is derived from [parquet.js](https://github.com/ironSource/parquetjs), contains a fully asynchronous 
-TypeScript implementation of the [Parquet](https://parquet.apache.org/) file format. The implementation conforms 
+This package is a fork of [parquets](https://github.com/kbajalc/parquets) which itself is derived from [parquet.js](https://github.com/ironSource/parquetjs).
+It contains a fully asynchronous TypeScript implementation of the [Parquet](https://parquet.apache.org/) file format. The implementation conforms 
 with the [Parquet specification](https://github.com/apache/parquet-format) and is being tested
 for compatibility with Apache's [reference implementation](https://github.com/apache/parquet-mr).
 
 **WARNING**: *There are compatibility issues with the reference implementation*:
 - only GZIP and SNAPPY compressions are compatible
-- [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools) are command line tools that aid in the inspection of Parquet files.
+- [Parquet Tools](https://mvnrepository.com/artifact/org.apache.parquet/parquet-tools) are command line tools that aid in the inspection of Parquet files.
 - always verify your table structure loaded with realistic data sample can be read by Parquet Tools!
 
 **What is Parquet?**: Parquet is a column-oriented file format; it allows you to
@@ -29,7 +28,7 @@ Installation
 To use parquets with node.js, install it using npm:
 
 ```
-  $ npm install parquets
+  $ npm install @dvirtz/parquets
 ```
 
 _parquets requires node.js >= 7.6.0_
@@ -42,7 +41,7 @@ Once you have installed the parquets library, you can import it as a single
 module:
 
 ``` ts
-import { ParquetSchema, ParquetWriter, ParquetReader } from 'parquets';
+import { ParquetSchema, ParquetWriter, ParquetReader } from from '@dvirtz/parquets';
 ```
 
 Parquet files have a strict schema, similar to tables in a SQL database. So,
