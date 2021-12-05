@@ -3,8 +3,8 @@
   "description": "TypeScript implementation of the Parquet file format, based on parquet.js",
   "version": "0.0.0-development",
   "upstream": "0.10.1",
-  "homepage": "https://github.com/kbajalc/parquets",
-  "author": "kbajalc@gmail.com",
+  "homepage": "https://github.com/dvirtz/parquets",
+  "author": "dvirtz@gmail.com",
   "license": "MIT",
   "browser": {
     "fs": false
