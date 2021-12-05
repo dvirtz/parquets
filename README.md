@@ -41,7 +41,7 @@ Once you have installed the parquets library, you can import it as a single
 module:
 
 ``` ts
-import { ParquetSchema, ParquetWriter, ParquetReader } from from '@dvirtz/parquets';
+import { ParquetSchema, ParquetWriter, ParquetReader } from '@dvirtz/parquets';
 ```
 
 Parquet files have a strict schema, similar to tables in a SQL database. So,
