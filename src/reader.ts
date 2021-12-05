@@ -6,7 +6,6 @@ import * as Shred from './shred';
 // tslint:disable-next-line:max-line-length
 import { ColumnChunk, CompressionCodec, ConvertedType, Encoding, FieldRepetitionType, FileMetaData, PageHeader, PageType, RowGroup, SchemaElement, Type } from './thrift';
 import * as Util from './util';
-import * as Types from './types';
 
 /**
  * Parquet File Magic String
@@ -645,8 +644,7 @@ function decodeDictionaryPage(cursor: CursorBuffer, header: PageHeader, column: 
     // cursor.offset = cursorEnd;
   }
 
-  return decodeValues(column.primitiveType, column.encoding, dictCursor, header.dictionary_page_header.num_values, {})
-    .map(d => Types.fromPrimitive(column.originalType || column.primitiveType, d));
+  return decodeValues(column.primitiveType, column.encoding, dictCursor, header.dictionary_page_header.num_values, {});
 }
 
 function decodeSchema(schemaElements: SchemaElement[], offset: number, len: number): {

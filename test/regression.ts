@@ -16,4 +16,12 @@ describe('regression tests', function () {
     }
     assert.isAbove(records.length, 0);
   });
+
+  it('#8 - Date column is not shown', async function () {
+    const reader = await parquet.ParquetReader.openFile(path.resolve(__dirname, 'test-files/dim-date.parquet'));
+    
+    let cursor = reader.getCursor();
+    const firstRecord = await cursor.next();
+    assert.isNotNaN(firstRecord.Date.getDate());
+  });
 });
