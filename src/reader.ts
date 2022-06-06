@@ -412,9 +412,9 @@ function decodeDataPages(buffer: Buffer, column: ParquetField, compression: Parq
       pageData.values = pageData.values.map(d => dictionary[d]);
     }
 
-    Array.prototype.push.apply(data.rlevels, pageData.rlevels);
-    Array.prototype.push.apply(data.dlevels, pageData.dlevels);
-    Array.prototype.push.apply(data.values, pageData.values);
+    data.rlevels = data.rlevels.concat(pageData.rlevels);
+    data.dlevels = data.dlevels.concat(pageData.dlevels);
+    data.values = data.values.concat(pageData.values);
     data.count += pageData.count;
   }
 

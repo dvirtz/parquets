@@ -139,10 +139,10 @@ export function decodeValues(type: PrimitiveType, cursor: CursorBuffer, count: n
     cursor.offset += varint.encodingLength(header);
     if (header & 1) {
       const count = (header >> 1) * 8;
-      values.push(...decodeRunBitpacked(cursor, count, opts));
+      values = values.concat(decodeRunBitpacked(cursor, count, opts));
     } else {
       const count = header >> 1;
-      values.push(...decodeRunRepeated(cursor, count, opts));
+      values = values.concat(decodeRunRepeated(cursor, count, opts));
     }
   }
   values = values.slice(0, count);
