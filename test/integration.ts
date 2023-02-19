@@ -4,6 +4,7 @@ import { ParquetCompression } from '../src';
 import chai = require('chai');
 import fs = require('fs');
 import parquet = require('../src');
+import { PassThrough } from 'stream';
 const assert = chai.assert;
 const objectStream = require('object-stream');
 
@@ -540,7 +541,22 @@ describe('Parquet', function () {
       const istream = objectStream.fromArray(mkTestRows());
       istream.pipe(transform).pipe(ostream);
       await promisify(ostream.on.bind(ostream, 'finish'))();
-      await readTestFile();
+      const reader = await parquet.ParquetReader.openFile('fruits_stream.parquet');
+      await checkTestData(reader);
+    });
+
+    it('write a test file with passthrough', async function () {
+      const opts: any = { useDataPageV2: true, compression: 'GZIP' };
+      const schema = mkTestSchema(opts);
+      const transform = new parquet.ParquetTransformer(schema, opts);
+      transform.writer.setMetadata('myuid', '420');
+      transform.writer.setMetadata('fnord', 'dronf');
+      const ostream = fs.createWriteStream('fruits_passthrough_stream.parquet');
+      const istream = objectStream.fromArray(mkTestRows());
+      istream.pipe(transform).pipe(new PassThrough).pipe(ostream);
+      await promisify(ostream.on.bind(ostream, 'finish'))();
+      const reader = await parquet.ParquetReader.openFile('fruits_passthrough_stream.parquet');
+      await checkTestData(reader);
     });
   });
 
