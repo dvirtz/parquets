@@ -3,6 +3,9 @@ import chai = require('chai');
 const assert = chai.assert;
 import parquet = require('../src');
 import path = require('path');
+import { writeTestData, mkTestSchema, TestOptions, readTestFile } from './utils';
+import { PassThrough } from 'stream';
+import { osopen } from '../src/util';
 
 describe('regression tests', function () {
   it('#4 - Error when trying to load Feast demo file', async function () {
@@ -23,5 +26,15 @@ describe('regression tests', function () {
     let cursor = reader.getCursor();
     const firstRecord = await cursor.next();
     assert.isNotNaN(firstRecord.Date.getDate());
+  });
+
+  it('#19 - close does not exist on - While using stream passthrough with parquets', async function () {    
+    const opts: TestOptions = { useDataPageV2: false, compression: 'UNCOMPRESSED' };
+    const schema = mkTestSchema(opts);
+    const passthrough = new PassThrough;
+    const outputStream = await osopen('fruits.parquet', {});
+    passthrough.pipe(outputStream);
+    const writer = await parquet.ParquetWriter.openStream(schema, outputStream, opts);
+    await writeTestData(writer, opts).then(readTestFile);
   });
 });

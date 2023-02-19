@@ -87,25 +87,6 @@
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"
   },
-  "jest": {
-    "testEnvironment": "node",
-    "verbose": true,
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(test/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "testPathIgnorePatterns": [
-      "<rootDir>/build_"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
   "prettier": {
     "arrowParens": "avoid",
     "singleQuote": true
