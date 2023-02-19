@@ -82,7 +82,7 @@
     "semantic-release": "^19.0.2",
     "snappy": "^6.3.5",
     "ts-jest": "^26.5.4",
-    "ts-node": "^8.3.0",
+    "ts-node": "^8.5.0",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"
