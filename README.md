@@ -1,5 +1,9 @@
 # @dvirtz/parquets
 
+ARCHIVED: this project will no longer be maintained. Consider using [parquet-wasm](https://kylebarron.dev/parquet-wasm) instead.
+
+---
+
 Fully asynchronous TypeScript implementation of the Parquet file format
 
 [![push](https://github.com/dvirtz/parquets/actions/workflows/push.yml/badge.svg)](https://github.com/dvirtz/parquets/actions/workflows/push.yml)
